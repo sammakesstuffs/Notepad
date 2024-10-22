@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordPad Clone</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="video-background">
+        <video id="light-video" autoplay muted loop>
+            <source src="images/light.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <video id="dark-video" autoplay muted loop style="display: none;">
+            <source src="images/dark.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <div class="container">
+        <!-- Sticky toolbar -->
+        <div class="toolbar">
+            <!-- Left-side: File actions -->
+            <div class="file-actions">
+                <button onclick="document.getElementById('file-input').click()">
+                    <img src="images/open.png" alt="Open" title="Open File">
+                </button>
+                <button onclick="saveFile()">
+                    <img src="images/save.png" alt="Save" title="Save File">
+                </button>
+            </div>
+
+            <!-- Middle: Text formatting and clipboard actions -->
+            <div class="format-actions">
+                <!-- Clipboard actions -->
+                <button onclick="copyToClipboard()">
+                    <img src="images/copy.png" alt="Copy" title="Copy">
+                </button>
+                <button onclick="pasteFromClipboard()">
+                    <img src="images/paste.png" alt="Paste" title="Paste">
+                </button>
+
+                <!-- Font and Size -->
+                <select id="fontName" onchange="setFontName()">
+                    <option value="Arial" style="font-family: Arial;">Arial</option>
+                    <option value="Calibri" style="font-family: Calibri;">Calibri</option>
+                    <option value="Times New Roman" style="font-family: 'Times New Roman';">Times New Roman</option>
+                    <option value="Georgia" style="font-family: Georgia;">Georgia</option>
+                    <option value="Verdana" style="font-family: Verdana;">Verdana</option>
+                </select>
+                <select id="fontSize" onchange="setFontSize()">
+                    <option value="1">10px</option>
+                    <option value="2">13px</option>
+                    <option value="3">16px</option>
+                    <option value="4">18px</option>
+                    <option value="5">24px</option>
+                    <option value="6">32px</option>
+                </select>
+
+                <!-- Text formatting -->
+                <button onclick="format('bold')"><b>B</b></button>
+                <button onclick="format('italic')"><i>I</i></button>
+                <button onclick="format('underline')"><u>U</u></button>
+                <button onclick="format('justifyLeft')">Left</button>
+                <button onclick="format('justifyCenter')">Center</button>
+                <button onclick="format('justifyRight')">Right</button>
+            </div>
+
+            <!-- Right-side: Dark mode toggle -->
+            <div class="theme-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="theme-toggle" onchange="toggleTheme()">
+                    <span class="slider round"></span>
+                </label>
+                <p>Dark Mode</p>
+            </div>
+        </div>
+
+        <!-- Editable Text Area -->
+        <div id="editor" contenteditable="true"></div>
+
+        <!-- Hidden file input for opening files -->
+        <input type="file" id="file-input" accept=".rtf, .docx" style="display:none" onchange="readFile()">
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
